@@ -1,0 +1,11 @@
+{
+    "/jkb-api": {
+        "target": "http://market.nb.zj.chinamobile.com/village/jkb-api",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/jkb-api": ""
+        }
+    }
+}
