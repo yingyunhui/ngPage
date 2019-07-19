@@ -5,7 +5,6 @@ a useful tool for your application.
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 //define response format
 interface httpResponse{
@@ -16,15 +15,7 @@ interface httpResponse{
 @Injectable()
 export class YYh implements CanActivate{
   
-  constructor(private http: HttpClient,private router: Router,private helper: JwtHelperService) {}
-  
-  //define request headers
-  httpOptions={
-    headers: new HttpHeaders({
-      //'Content-Type':'application/json'
-      'Content-Type':'application/x-www-form-urlencoded'
-    })
-  }
+  constructor(private http: HttpClient,private router: Router) {}
   
   //define root route
   login=['login'];
@@ -43,11 +34,27 @@ export class YYh implements CanActivate{
     }
   }
 
+  httpOptions(t:boolean){
+    if(t) {
+      return {
+        headers: new HttpHeaders({
+          'Content-Type':'application/x-www-form-urlencoded',
+          'token':localStorage.getItem('token')
+        })
+      }
+    }else{
+      return {
+        headers: new HttpHeaders({
+          'Content-Type':'application/x-www-form-urlencoded'
+        })
+      }
+    }
+  }
   //request type: get
-  get(url,handler=false){
+  get(url,token=true){
     return new Promise<httpResponse>((resolve,rejects)=>{
-      this.http.get<httpResponse>(url,this.httpOptions).subscribe(r=>{
-        if(handler) this.httpHandler(r);
+      this.http.get<httpResponse>(url,this.httpOptions(token)).subscribe(r=>{
+        if(token) this.httpHandler(r);
         resolve(r);
       },e=>{
         rejects(e);
@@ -56,11 +63,10 @@ export class YYh implements CanActivate{
   }
 
   //request type: post
-  post(url,options,handler=false){
-    console.log(handler)
+  post(url,options,token=true){
     return new Promise<httpResponse>((resolve,rejects)=>{
-      this.http.post<httpResponse>(url,this.Urlencode(options),this.httpOptions).subscribe(r=>{
-        if(handler) this.httpHandler(r);
+      this.http.post<httpResponse>(url,this.Urlencode(options),this.httpOptions(token)).subscribe(r=>{
+        if(token) this.httpHandler(r);
         resolve(r);
       },e=>{
         rejects(e);
@@ -70,7 +76,7 @@ export class YYh implements CanActivate{
   
   //get token
   getToken(){
-    return this.helper.decodeToken(localStorage.getItem(this.token));
+    //return this.helper.decodeToken(localStorage.getItem(this.token));
   }
 
   //set the page activate according to the token

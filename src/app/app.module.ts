@@ -7,8 +7,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-import { JwtModule } from '@auth0/angular-jwt';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { YYh } from '../providers/yyh';
@@ -25,15 +23,7 @@ export function tokenGetter(){
     IonicModule.forRoot({
       mode:'ios'
     }), 
-    AppRoutingModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        headerName: 'token',
-        authScheme: '',
-        whitelistedDomains: ['localhost:8100']
-      }
-    })
+    AppRoutingModule
   ],
   providers: [
     StatusBar,

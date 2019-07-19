@@ -9,7 +9,7 @@ import { YYh } from '../../providers/yyh';
 export class Tab1Page {
   res:string= "loading...";
   constructor(private yyh: YYh) {
-    yyh.post("/jkb-api/login",{username:"yingyunhui",password:"Nb123456"},true);
+    yyh.post("/jkb-api/login",{username:"yingyunhui",password:"Nb123456"},false);
   }
 
 }
