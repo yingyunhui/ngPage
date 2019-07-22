@@ -7,21 +7,19 @@
 </ion-header>
 
 <ion-content>
-  <form (submit)="handleSubmit()">
-    <ion-list lines="full" class="ion-no-margin ion-no-padding">
-      <ion-item>
-        <ion-label position="stacked">UserName<ion-text color="danger">*<span *ngIf="isSubmit&&handleEmpty('userName')">用户名不能为空！</span></ion-text></ion-label>
-        <ion-input type="text" (input)="handleInputValue($event,'userName')" ></ion-input>
-      </ion-item>
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <ion-item>
+      <ion-label position="stacked">UserName<ion-text color="danger">*<span *ngIf="isSubmit&&isEmpty('userName')">用户名不能为空！</span></ion-text></ion-label>
+      <ion-input type="text" [(ngModel)]="user.userName"></ion-input>
+    </ion-item>
       
-      <ion-item>
-        <ion-label position="stacked">PassWord<ion-text color="danger">*</ion-text></ion-label>
-        <ion-input type="text" (input)="handleInputValue($event,'passWord')" ></ion-input>
-      </ion-item>
-    </ion-list>
+    <ion-item>
+      <ion-label position="stacked">PassWord<ion-text color="danger">*</ion-text></ion-label>
+      <ion-input type="text" (input)="handleInputValue($event,'passWord')" ></ion-input>
+    </ion-item>
+  </ion-list>
       
-    <div class="ion-padding">
-      <ion-button expand="block" type="submit" class="ion-no-margin">Create account</ion-button>
-    </div>
-  </form>
+  <div class="ion-padding">
+    <ion-button expand="block" type="submit" class="ion-no-margin" (click)="handleSubmit()">Create account</ion-button>
+  </div>
 </ion-content>

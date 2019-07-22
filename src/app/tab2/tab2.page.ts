@@ -12,15 +12,19 @@ export class Tab2Page {
     passWord:''
   }
 
-  isSubmit=false
+  isSubmit=false;
 
   constructor(private yyh: YYh) {}
   
-  handleEmpty(key){
-    return this.yyh.isObjValue(this.user,key)?false:true;
+  isEmpty(key){
+    let flg=false;
+    let obj=this.user;
+    if(obj[key]==null||obj[key]==''||obj[key]==undefined) flg=true;
+    return flg;
   }
   handleSubmit(){
     this.isSubmit=true;
+    console.log(this.user);
   }
   handleInputValue(event,key){
     switch(key){
