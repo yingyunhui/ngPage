@@ -1,9 +1,22 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Three
+      网格视图
     </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-segment (ionChange)="segmentChanged($event)">
+  <ion-segment-button value="1" checked>
+    <ion-label>大势</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="2">
+    <ion-label>家庭</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="3">
+    <ion-label>集团</ion-label>
+  </ion-segment-button>
+</ion-segment>
 
-<ion-content></ion-content>
+<ion-content>
+  <div id="cjmap" style="width:100%;height:100%"></div>
+</ion-content>
