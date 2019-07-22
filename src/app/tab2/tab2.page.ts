@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { YYh } from '../../providers/yyh';
+import { ModalPage } from '../modal/modal.page';
 
 @Component({
   selector: 'app-tab2',
@@ -14,7 +16,9 @@ export class Tab2Page {
 
   isSubmit=false;
 
-  constructor(private yyh: YYh) {}
+  isModal=false;
+
+  constructor(private yyh: YYh, public modalCtrl: ModalController) {}
   
   isEmpty(key){
     let flg=false;
@@ -25,6 +29,20 @@ export class Tab2Page {
   handleSubmit(){
     this.isSubmit=true;
     console.log(this.user);
+    this.presentModal();
+  }
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: ModalPage,
+      componentProps: {
+        'firstName': 'Douglas',
+        'lastName': 'Adams',
+        'callback': function(data){
+          console.log(1);
+        }.bind(this)
+      }
+    });
+    return await modal.present();
   }
   handleInputValue(event,key){
     switch(key){
