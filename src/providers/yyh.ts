@@ -78,7 +78,29 @@ export class YYh implements CanActivate{
   getToken(){
     //return this.helper.decodeToken(localStorage.getItem(this.token));
   }
+  
+  isObjValue(obj:any, key:string){
+    let flg=false;
+    for(let k in obj){
+      if(k==key){
+        if(obj[k]!=null&&obj[k]!=''&&obj[k]!=undefined) flg=true;
+        break;
+      }
+    }
+    return flg;
+  }
 
+  getObjValue(obj:any, key:string){
+    let value='';
+    for(let k in obj){
+      if(k==key){
+        value= obj[k]==null?'':obj[k];
+        break;
+      }
+    }
+    return value;
+  }
+  
   //set the page activate according to the token
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (localStorage.getItem(this.token)) {

@@ -9,7 +9,7 @@ import { YYh } from '../../providers/yyh';
 export class Tab2Page {
   user={
     userName:'',
-    passWord:''
+    passWord:null
   }
 
   isSubmit=false
@@ -18,7 +18,6 @@ export class Tab2Page {
 
   handleSubmit(){
     this.isSubmit=true;
-    this.yyh.post("example",this.user);
   }
   handleInputValue(event,key){
     switch(key){
