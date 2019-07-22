@@ -10,7 +10,7 @@
   <form (submit)="handleSubmit()">
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
-        <ion-label position="stacked">UserName<ion-text color="danger">*<span *ngIf="isSubmit&&user.userName==''">用户名不能为空！</span></ion-text></ion-label>
+        <ion-label position="stacked">UserName<ion-text color="danger">*<span *ngIf="isSubmit&&handleEmpty('userName')">用户名不能为空！</span></ion-text></ion-label>
         <ion-input type="text" (input)="handleInputValue($event,'userName')" ></ion-input>
       </ion-item>
       

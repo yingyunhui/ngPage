@@ -9,13 +9,16 @@ import { YYh } from '../../providers/yyh';
 export class Tab2Page {
   user={
     userName:'',
-    passWord:null
+    passWord:''
   }
 
   isSubmit=false
 
   constructor(private yyh: YYh) {}
-
+  
+  handleEmpty(key){
+    return this.yyh.isObjValue(this.user,key)?false:true;
+  }
   handleSubmit(){
     this.isSubmit=true;
   }
