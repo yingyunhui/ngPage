@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { YYh } from '../../providers/yyh';
 
 @Component({
   selector: 'app-tab2',
@@ -6,7 +7,27 @@ import { Component } from '@angular/core';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  user={
+    userName:'',
+    passWord:''
+  }
 
-  constructor() {}
+  isSubmit=false
 
+  constructor(private yyh: YYh) {}
+
+  handleSubmit(){
+    this.isSubmit=true;
+    this.yyh.post("example",this.user);
+  }
+  handleInputValue(event,key){
+    switch(key){
+      case 'userName':
+        this.user.userName=event.target.value;
+        break;
+      case 'passWord':
+        this.user.passWord=event.target.value;
+        break;
+    }
+  }
 }
