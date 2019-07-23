@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content fullscreen>
+  <app-template [test]="123" (ihuClick)="tempClick($event)"></app-template>
   <ion-list>
     <ion-list-header>
       Recent Conversations
