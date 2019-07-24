@@ -33,13 +33,27 @@ export class YYh implements CanActivate{
       this.router.navigate(this.login);
     }
   }
-
-  httpOptions(t:boolean){
-    if(t) {
+  
+  //define params and formdata
+  httpOptions(t:boolean,f=false){
+    if(t&&!f) {
       return {
         headers: new HttpHeaders({
           'Content-Type':'application/x-www-form-urlencoded',
           'token':localStorage.getItem('token')
+        })
+      }
+    }else if(t&&f){
+      return {
+        headers: new HttpHeaders({
+          'Content-Type':'multipart/form-data',
+          'token':localStorage.getItem('token')
+        })
+      }
+    }else if(!t&&f){
+      return {
+        headers: new HttpHeaders({
+          'Content-Type':'multipart/form-data'
         })
       }
     }else{
@@ -66,6 +80,20 @@ export class YYh implements CanActivate{
   post(url,options,token=true){
     return new Promise<httpResponse>((resolve,rejects)=>{
       this.http.post<httpResponse>(url,this.Urlencode(options),this.httpOptions(token)).subscribe(r=>{
+        if(token) this.httpHandler(r);
+        resolve(r);
+      },e=>{
+        rejects(e);
+      })
+    });
+  }
+  
+  //request file: post
+  upload(url,fileName,fileObj,token=true){
+    let formData: FormData = new FormData();
+    formData.append(fileName, fileObj, fileObj.name);
+    return new Promise<httpResponse>((resolve,rejects)=>{
+      this.http.post<httpResponse>(url,formData,this.httpOptions(token,true)).subscribe(r=>{
         if(token) this.httpHandler(r);
         resolve(r);
       },e=>{

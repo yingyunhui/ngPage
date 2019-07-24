@@ -6,20 +6,11 @@
 
 <ion-content fullscreen>
   <app-template [test]="123" (ihuClick)="tempClick($event)"></app-template>
-  <ion-list>
-    <ion-list-header>
-      Recent Conversations
-    </ion-list-header>
+  <input type="file" (change)="OnFileSelected($event)" name='photo'/><br/>
+  <button type='submit' (click)="OnUpload()">Save Post</button><br/><br/>
 
-    <ion-item>
-      <ion-avatar slot="start">
-        1111
-      </ion-avatar>
-      <ion-label>
-        <h2>Finn</h2>
-        <h3>I'm a big deal</h3>
-        <p>{{res}}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <button (click)="getUrl()">get IMG</button><br/>
+  <span>{{url}}</span><br/>
+  <a [href]="url">download</a>
+  <button (click)="download()">download</button>
 </ion-content>

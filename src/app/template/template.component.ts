@@ -19,4 +19,7 @@ export class TemplateComponent implements OnInit {
     this.ihuClick.emit('kkk');
   }
 
+  input(event){
+    this.test=event.target.value;
+  }
 }
