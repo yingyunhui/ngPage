@@ -9,8 +9,12 @@ import { YYh } from '../../providers/yyh';
 export class Tab1Page {
   file:any;
   url:any;
+  token="test";
   constructor(private yyh: YYh) {
-    
+    //其他下载
+    //yyh.download('http://xxgk.nbu.edu.cn/dfiles/xxgksqb.doc',false);
+    //自有下载
+    yyh.download('/download');
   }
   tempClick(event){
     console.log(event);

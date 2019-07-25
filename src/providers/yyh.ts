@@ -5,6 +5,8 @@ a useful tool for your application.
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import * as $ from 'jquery';
+import 'jquery-form';
 
 //define response format
 interface httpResponse{
@@ -102,6 +104,22 @@ export class YYh implements CanActivate{
     });
   }
   
+  //download file
+  download(url, token=true){
+    if(token){
+      $('<form></form>').appendTo('body').ajaxSubmit({
+        headers:{
+          "token": localStorage.getItem("token")
+        },
+        url:url,
+        method:"get"
+      }).remove();
+    }
+    else{
+      $('<form action="'+ url +'" method="get"></form>').appendTo('body').submit().remove();
+    }
+  }
+
   //get token
   getToken(){
     //return this.helper.decodeToken(localStorage.getItem(this.token));
